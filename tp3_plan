@@ -1,0 +1,41 @@
+# Emilie Mancera
+# 404
+
+import random
+
+niveau_vie = 20
+boucle_jeu = True
+
+def jeu():
+    while boucle_jeu:
+        force_adversaire = random.randint(1, 5)
+        print("Vous tombez face à un adversaire de difficulté : " + str(force_adversaire))
+        point_depart = input("Que voulez-vous faire?"
+                                 "1- Combattre cet adversaire"
+                                 "2- Contourner cet adversaire et aller ouvrir une autre porte "
+                                 "3- Afficher les règles du jeu"
+                                 "4- Quitter la partie")
+        if point_depart == ('1'):
+            lancer = random.randint(1, 6)
+            print("Votre attaque vaut: " + str(lancer))
+
+            if lancer < force_adversaire:
+                def defaite():
+                    str(niveau_vie - force_adversaire)
+                    print("Votre niveau de vie a baissé de:" + str(force_adversaire) + ". Votre niveau de vie est maintenant de: " + str(niveau_vie))
+                defaite()
+            if lancer > force_adversaire:
+                def victoire():
+                    print("Bravo! Vous passez au niveau suivant")
+                victoire()
+
+
+        #if point_depart = ("2"):
+
+        #if point_depart = ("3"):
+
+        #if point_depart = ("4"):
+
+        else:
+            print("Cette option n'existe pas")
+jeu()

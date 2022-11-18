@@ -1,0 +1,73 @@
+# Emilie Mancera
+# 404
+
+import random
+
+niveau_vie = 20
+boucle_jeu = True
+
+no_adv: str = 1
+no_combat: str = 1
+no_victoire = 0
+no_defaite = 0
+
+
+def stats():
+    print("Adversaire #" + str(no_adv))
+    print("Force de l'advrsaire:" + str(force_adversaire))
+    print("Niveau de vie de l'usager:" + str(niveau_vie))
+    print("Combat" + str(no_combat) + ": " + str(no_victoire) + " VS" + str(no_defaite))
+    no_adv += 1
+
+
+# On définit l'ordre du jeu
+def jeu(no_defaite=0, no_victoire=0):
+    while boucle_jeu:
+
+        force_adversaire = random.randint(1,5)  # On définit la force de l'adversaire (s'applique pour tous les adversaires)
+        print("Vous tombez face à un adversaire de difficulté : " + str(force_adversaire))
+        point_depart: = input("Que voulez-vous faire?"
+                             "1- Combattre cet adversaire"
+                             "2- Contourner cet adversaire et aller ouvrir une autre porte "
+                             "3- Afficher les règles du jeu"
+                             "4- Quitter la partie")  # On affiche le menu de la partie
+        # si l'utilisateur chosi l'option 1
+        if point_depart == ('1'):
+            lancer = random.randint(1, 6)
+            print("Votre attaque vaut: " + str(lancer))
+
+            if lancer < force_adversaire:
+                def defaite(niveau_vie=20):
+                    niveau_vie -= force_adversaire
+                    print("Votre niveau de vie a baissé de:" + str(
+                        force_adversaire) + ". Votre niveau de vie est maintenant de: " + str(niveau_vie))
+
+                defaite()
+                no_defaite += 1
+                stats()
+
+            if lancer > force_adversaire:
+                def victoire():
+                    print("Bravo! Vous passez au niveau suivant")
+
+                victoire()
+                no_victoire += 1
+                stats()
+
+            if lancer == force_adversaire:
+                victoire()
+                stats()
+
+        if point_depart == ("2"):
+            niveau_vie -= 1
+
+        if point_depart == ("3"):
+
+
+        # if point_depart == ("4"):
+
+        else:
+            print("Cette option n'existe pas")
+
+
+jeu()

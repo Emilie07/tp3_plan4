@@ -1,0 +1,121 @@
+# Emilie Mancera
+# 404
+
+import random #On amène une librairie random
+
+# On définit les premières statistiques du jeu
+niveau_vie = 20
+boucle_jeu = True
+
+no_adv: str = 1
+no_combat: str = 1
+no_victoire = 0
+no_defaite = 0
+
+# On organise le message qui montre les statistiques de jeu au joueur
+def stats():
+    print("Adversaire #" + str(no_adv))
+    print("Force de l'advrsaire:" + str(force_adversaire))
+    print("Niveau de vie de l'usager:" + str(niveau_vie))
+    print("Combat" + str(no_combat) + ": " + str(no_victoire) + " VS" + str(no_defaite))
+    no_adv += 1 #Après chaque victoire, le nombre d'adversaires vaincus augmentera de 1
+
+# On définit l'ordre du jeu
+def jeu(no_defaite=0, no_victoire=0):
+    while boucle_jeu:
+        force_adversaire = random.randint(1,5)  # On définit la force de l'adversaire (s'applique pour tous les adversaires)
+        print("Vous tombez face à un adversaire de difficulté : " + str(force_adversaire)) #On introduit l'adversaire
+        point_depart = str(input("Que voulez-vous faire?"
+                             "1- Combattre cet adversaire"
+                             "2- Contourner cet adversaire et aller ouvrir une autre porte "
+                             "3- Afficher les règles du jeu"
+                             "4- Quitter la partie"))  # On affiche le menu de la partie
+
+        # si l'utilisateur chosi l'option 1 dans le menu
+        if point_depart == ('1'):
+            lancer = random.randint(1, 6) # On détermine la force de l'attaque
+            print("Votre attaque vaut: " + str(lancer))
+
+            # Si l'attaque du joueur est plus faible que l'ennemi
+            if lancer < force_adversaire:
+                def defaite():
+                    niveau_vie -= force_adversaire # Le joueur perds autant de points de vie que la force de l'ennemi
+                    print("Votre niveau de vie a baissé de:" + str(force_adversaire) + ". Votre niveau de vie est maintenant de: " + str(niveau_vie))
+                defaite()
+                no_defaite += 1 # On augmente le nombre de défaites de 1
+                stats() #On affiche les stats
+
+            # Si l'attaque du joueur est plus forte que celle de l'ennemi
+            if lancer > force_adversaire:
+                def victoire():
+                    print("Bravo! Vous passez au niveau suivant")
+                victoire()
+                no_victoire += 1 #On augmente le nombre de victoires de 1
+                stats() # On affiche les stats
+
+            # Si l'attaque du joueur est égale a celle de l'ennemi
+            if lancer == force_adversaire:
+                victoire()
+                stats() # On affiche les stats
+
+        # Si l'utilisateur choisi l'option 2 dans le menu
+        if point_depart == ("2"):
+            niveau_vie -= 1 # On enlève un point de vie au joueur
+            print("""Vous perdez un point de vie. 
+            Votre diveau de vie est maintenant de """ + str(niveau_vie))
+            jeu() # On reviens au point de départ du jeu
+
+        # Si l'utilisateur choisi l'option 3 dans le menu
+        if point_depart == ("3"):
+            print("""Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire.  
+            Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire. 
+            Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  
+            Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire.
+            La partie se termine lorsque les points de vie de l’usager tombent sous 0.
+            L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie.""")
+            # On affiche les règles du jeu
+            jeu() # On reviens au début du jeu
+
+        # Si l'utilisateur choisi l'option 4 dans le menu
+        if point_depart == ("4"):
+            quitter = input("Voulez-vous quitter le jeu? (y/n)")
+            if quitter == "y":
+                print("Merci et au revoir...")
+                exit() # On termine le jeu si l'utilisateur veut quitter le jeu
+            if quitter == "n":
+                jeu() # On recommence le jeu
+
+        # Si l'utilisateur choisi une option qui n'existe pas dans le menu
+        else:
+            print("Cette option n'existe pas")
+
+if no_victoire = 3:
+    def boss():
+        force_adversaire = random.randint(5,6)
+        print("Vous avez atteint le niveau du boss. Il a un niveau de force de: " + str(force_adversaire))
+        affront_boss = input("Voulez-vous l'affronter? y/n")
+        if affront_boss == "y":
+            lancer = random.randint(1, 6)  # On détermine la force de l'attaque
+            print("Votre attaque vaut: " + str(lancer))
+
+            # Si l'attaque du joueur est plus faible que l'ennemi
+            if lancer < force_adversaire:
+                def defaite():
+                    niveau_vie -= force_adversaire  # Le joueur perds autant de points de vie que la force de l'ennemi
+                    print("Votre niveau de vie a baissé de:" + str(
+                        force_adversaire) + ". Votre niveau de vie est maintenant de: " + str(niveau_vie))
+
+                defaite()
+                no_defaite += 1  # On augmente le nombre de défaites de 1
+                stats()  # On affiche les stats
+
+            # Si l'attaque du joueur est plus forte que celle de l'ennemi
+            if lancer > force_adversaire:
+                def victoire():
+                    print("Bravo! Vous passez au niveau suivant")
+
+                victoire()
+                no_victoire += 1  # On augmente le nombre de victoires de 1
+                stats()  # On affiche les stats
+
+jeu()
